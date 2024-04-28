@@ -6,33 +6,12 @@ namespace Semana4.Controllers
 {
     public class ModelController : Controller
     {
+        private static List<Modelo> listMovies = new List<Modelo>();
+
         // GET: ModelController
         public async Task<IActionResult> Index()
         {
-            var listMovies = new List<Modelo>();
-
-            var movie1 = new Modelo
-            {
-                Genero = "Terror",
-                Id = 1,
-                Precio = 1,
-                FechaRealizacion = DateTime.Now,
-                Titulo = "La noche del terror"
-            };
-            listMovies.Add(movie1);
-
-            var movie2 = new Modelo
-            {
-                Genero = "Terror",
-                Id = 1,
-                Precio = 1,
-                FechaRealizacion = DateTime.Now,
-                Titulo = "La noche del terror II"
-            };
-            listMovies.Add(movie2);
-
             return View(listMovies);
-
         }
 
         // GET: ModelController/Details/5
@@ -43,17 +22,12 @@ namespace Semana4.Controllers
                 return NotFound();
             }
 
-            //Simulación de creación de un objeto (model)
-            //Mas adelante vamos a ver como usar una base de datos
-            var movie = new Modelo
-            {
-                Genero = "Terror",
-                Id = 1,
-                Precio = 1,
-                FechaRealizacion = DateTime.Now,
-                Titulo = "La noche del terror"
-            };
+            var movie = listMovies.Find(m => m.Id == id);
 
+            if (movie == null)
+            {
+                return NotFound();
+            }
 
             return View(movie);
         }
@@ -67,58 +41,92 @@ namespace Semana4.Controllers
         // POST: ModelController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Modelo model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    // Simplemente asignamos un nuevo id como el siguiente número en la lista
+                    model.Id = listMovies.Count + 1;
+                    listMovies.Add(model);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Error al crear la película: " + ex.Message);
             }
+            return View(model);
         }
 
         // GET: ModelController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var movie = listMovies.Find(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
         }
 
         // POST: ModelController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Modelo model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var movieIndex = listMovies.FindIndex(m => m.Id == id);
+                    if (movieIndex == -1)
+                    {
+                        return NotFound();
+                    }
+                    listMovies[movieIndex] = model;
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Error al editar la película: " + ex.Message);
             }
+            return View(model);
         }
 
         // GET: ModelController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var movie = listMovies.Find(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
         }
 
         // POST: ModelController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Modelo model)
         {
             try
             {
+                var movieIndex = listMovies.FindIndex(m => m.Id == id);
+                if (movieIndex == -1)
+                {
+                    return NotFound();
+                }
+                listMovies.RemoveAt(movieIndex);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Error al eliminar la película: " + ex.Message);
             }
+            return View(model);
         }
     }
 }

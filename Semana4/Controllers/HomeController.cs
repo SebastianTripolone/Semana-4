@@ -15,29 +15,8 @@ namespace Semana4.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var listMovies = new List<Modelo>();
 
-            var movie1 = new Modelo
-            {
-                Genero = "Terror",
-                Id = 1,
-                Precio = 1,
-                FechaRealizacion = DateTime.Now,
-                Titulo = "La noche del terror"
-            };
-            listMovies.Add(movie1);
-
-            var movie2 = new Modelo
-            {
-                Genero = "Terror",
-                Id = 1,
-                Precio = 1,
-                FechaRealizacion = DateTime.Now,
-                Titulo = "La noche del terror II"
-            };
-            listMovies.Add(movie2);
-
-            return View(listMovies);
+            return View();
 
         }
 

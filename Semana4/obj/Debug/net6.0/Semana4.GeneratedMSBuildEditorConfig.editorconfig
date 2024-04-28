@@ -24,8 +24,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Sebastian/source/repos/Semana4/Semana4/Views/Model/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sebastian/source/repos/Semana4/Semana4/Views/Model/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Sebastian/source/repos/Semana4/Semana4/Views/Model/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sebastian/source/repos/Semana4/Semana4/Views/Model/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Sebastian/source/repos/Semana4/Semana4/Views/Model/Index.cshtml]
